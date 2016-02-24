@@ -1,9 +1,9 @@
 build:
 	docker build -t goatapps/goatapps-dot-net ./
 
-deploy-images: build
+deploy-image: build
 	docker push goatapps/goatapps-dot-net
 
-deploy-site: deploy-images
+deploy-site: deploy-image
 	kontena app deploy
 
