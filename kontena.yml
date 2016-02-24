@@ -1,0 +1,7 @@
+web:
+  image: goatapps/goatapps-dot-net
+  restart: on-failure
+  environment:
+    KONTENA_LB_VIRTUAL_HOSTS: goatapps.net
+  external_links:
+    - lb
