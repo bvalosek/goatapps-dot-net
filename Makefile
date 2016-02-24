@@ -1,5 +1,5 @@
 build:
-	docker build -t goatapps/goatapps-dot-net
+	docker build -t goatapps/goatapps-dot-net ./
 
 deploy-images: build
 	docker push goatapps/goatapps-dot-net
