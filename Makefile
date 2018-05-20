@@ -1,5 +1,18 @@
-build:
-	docker build -t goatapps/goatapps-dot-net ./
+TAG = goatapps/www
+ECR = 404054428023.dkr.ecr.us-east-1.amazonaws.com
+SERVICE = goatapps-www
 
-deploy-image: build
-	docker push goatapps/goatapps-dot-net
+build:
+	docker build -t $(TAG) .
+	
+ship-image: build
+	`aws ecr get-login --no-include-email --region us-east-1`
+	docker tag $(TAG):latest $(ECR)/$(TAG):latest
+	docker push $(ECR)/$(TAG):latest
+
+deploy: ship-image
+	aws ecs update-service \
+		--region us-east-1 \
+		--cluster phatnode \
+		--service $(SERVICE) \
+		--force-new-deployment

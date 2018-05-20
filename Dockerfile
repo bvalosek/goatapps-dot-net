@@ -1,2 +1,3 @@
-FROM nginx:1.9.9
-COPY ./site /usr/share/nginx/html/
+FROM nginx:1.13
+COPY ./nginx.conf /etc/nginx/nginx.conf
+COPY ./www /usr/share/nginx/html/
